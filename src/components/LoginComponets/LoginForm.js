@@ -1,10 +1,18 @@
 import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { login } from '../../features/auth/authSlice'
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   })
+
+  const dispatch = useDispatch()
+
+  const { user, isError, isLoading, isSuccess, errorMessage } = useSelector(
+    (state) => state.auth
+  )
 
   const handleChange = (e) => {
     setFormData({
@@ -15,7 +23,7 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(formData)
+    dispatch(login(formData))
     setFormData({
       username: '',
       password: '',
@@ -33,7 +41,7 @@ const LoginForm = () => {
             value={formData.username}
             autoComplete='username'
             placeholder='Username or email'
-            className='block w-full rounded-xl border-0 py-1.5 h-14 px-4 text-white shadow-sm ring-1 ring-inset ring-black placeholder:text-[#777777] bg-[#1e1e1e] focus:ring-2 focus:ring-inset focus:ring-gray-700 sm:text-sm sm:leading-6'
+            className='block w-full rounded-xl border-0 py-1.5 h-14 px-4 text-white shadow ring-1 ring-inset ring-black placeholder:text-[#777777] bg-[#1e1e1e] focus:ring-2 focus:ring-inset focus:ring-gray-700 sm:text-sm sm:leading-6'
             onChange={handleChange}
           />
         </div>
@@ -47,7 +55,7 @@ const LoginForm = () => {
             value={formData.password}
             autoComplete='current-password'
             placeholder='Password'
-            className='block w-full rounded-xl border-0 py-1.5 h-14 px-4 text-white shadow-sm ring-1 ring-inset ring-black placeholder:text-[#777777] bg-[#1e1e1e] focus:ring-2 focus:ring-inset focus:ring-gray-700 sm:text-sm sm:leading-6'
+            className='block w-full rounded-xl border-0 py-1.5 h-14 px-4 text-white shadow ring-1 ring-inset ring-black placeholder:text-[#777777] bg-[#1e1e1e] focus:ring-2 focus:ring-inset focus:ring-gray-700 sm:text-sm sm:leading-6'
             onChange={handleChange}
           />
         </div>

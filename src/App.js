@@ -3,13 +3,13 @@ import Login from './pages/Login'
 
 function App() {
   return (
-    <Router>
-      <div className='h-screen'>
-        <Routes>
-          <Route path='/login' element={<Login />} />
-        </Routes>
-      </div>
-    </Router>
+      <Router>
+        <div className='h-screen'>
+          <Routes>
+            <Route path='/login' element={<Login />} />
+          </Routes>
+        </div>
+      </Router>
   )
 }
 
