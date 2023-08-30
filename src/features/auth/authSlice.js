@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import authService from './authService'
 
 const initialState = {
   user: null,
@@ -9,20 +9,20 @@ const initialState = {
   errorMessage: '',
 }
 
+// Thunk for logging in user.
 export const login = createAsyncThunk(
   'auth/login',
   async ({ username, password }, thunkAPI) => {
     try {
-      const response = await axios('http://localhost:5001/api/users/login', {
-        method: 'POST',
-        data: {
-          username,
-          password,
-        },
-      })
-      return response.data
+      return await authService.login({ username, password })
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data)
+      const message =
+        (error.response.data.errors[0].msg || error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue({ message })
     }
   }
 )
@@ -31,7 +31,22 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(login.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.user = action.payload
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.errorMessage = action.payload.message
+      })
+  },
 })
 
 export default authSlice.reducer

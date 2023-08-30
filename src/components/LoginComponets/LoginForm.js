@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { login } from '../../features/auth/authSlice'
 
 const LoginForm = () => {
@@ -9,10 +9,6 @@ const LoginForm = () => {
   })
 
   const dispatch = useDispatch()
-
-  const { user, isError, isLoading, isSuccess, errorMessage } = useSelector(
-    (state) => state.auth
-  )
 
   const handleChange = (e) => {
     setFormData({

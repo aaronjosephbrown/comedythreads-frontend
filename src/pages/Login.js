@@ -2,11 +2,30 @@ import logo from '../assets/img/comedy-thread-logo.png'
 import LoginForm from '../components/LoginComponets/LoginForm'
 import LoginFooter from '../components/LoginComponets/LoginFooter'
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 const Login = () => {
+  const { user, isError, isLoading, isSuccess, errorMessage } = useSelector(
+    (state) => state.auth
+  )
+
   useEffect(() => {
     document.title = 'Comedy Threads'
   }, [])
+  useEffect(() => {
+    if (isError) {
+      toast.error(errorMessage,{
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: false,
+          progress: undefined,
+          theme: "dark",
+      })
+    }
+  })
 
   return (
     <div className='h-screen flex flex-col justify-between bg-[#101010]'>
