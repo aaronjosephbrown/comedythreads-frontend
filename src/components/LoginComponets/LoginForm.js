@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const LoginForm = ({dispatch, login}) => {
+const LoginForm = ({ dispatch, login }) => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -21,6 +21,9 @@ const LoginForm = ({dispatch, login}) => {
       password: '',
     })
   }
+
+
+  const isFormValid = formData.username && formData.password;
 
   return (
     <form className='space-y-2' method='POST' onSubmit={handleSubmit}>
@@ -55,7 +58,8 @@ const LoginForm = ({dispatch, login}) => {
       <div>
         <button
           type='submit'
-          className='flex w-full justify-center items-center rounded-xl bg-[#ffffff] py-1.5 h-14 text-sm font-semibold leading-6 text-[#9f9f9f] shadow-sm'
+          className={`flex w-full justify-center items-center rounded-xl bg-[#ffffff] py-1.5 h-14 text-sm font-semibold leading-6 text-[#9f9f9f] shadow-sm ${isFormValid ? 'bg-[#ffffff] text-[#9f9f9f]' : 'bg-[#888888] text-[#666666]'}`}
+          disabled={!isFormValid}
         >
           Log in
         </button>

@@ -18,7 +18,7 @@ const Login = () => {
   useEffect(() => {
     document.title = 'Comedy Threads'
   }, [])
-  
+
   useEffect(() => {
     if (isError) {
       toast.error(errorMessage, {
@@ -39,7 +39,11 @@ const Login = () => {
   }, [isError, isSuccess, user, errorMessage, dispatch, navigate])
 
   if (isLoading) {
-    return <h1>Loading...</h1>
+    return (
+      <div className='h-screen flex bg-[#101010] justify-center items-center'>
+        <img src={logo} alt='Comedy Threads' className='mx-auto h-48 w-auto animate-bounce'/>
+      </div>
+    )
   } else {
     return (
       <div className='h-screen flex flex-col justify-between bg-[#101010]'>
