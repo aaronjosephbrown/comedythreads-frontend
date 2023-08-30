@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { login, reset } from '../features/auth/authSlice'
+import Loading from '../components/Loading/Loading'
 
 const Login = () => {
   const { user, isError, isLoading, isSuccess, errorMessage } = useSelector(
@@ -40,9 +41,7 @@ const Login = () => {
 
   if (isLoading) {
     return (
-      <div className='h-screen flex bg-[#101010] justify-center items-center'>
-        <img src={logo} alt='Comedy Threads' className='mx-auto h-48 w-auto animate-bounce'/>
-      </div>
+      <Loading />
     )
   } else {
     return (
