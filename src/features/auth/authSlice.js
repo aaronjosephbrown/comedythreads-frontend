@@ -17,7 +17,8 @@ export const login = createAsyncThunk(
       return await authService.login({ username, password })
     } catch (error) {
       const message =
-        (error.response.data.errors[0].msg || error.response &&
+        error.response.data.errors[0].msg ||
+        (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
@@ -30,7 +31,14 @@ export const login = createAsyncThunk(
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.isError = false
+      state.isLoading = false
+      state.isSuccess = false
+      state.errorMessage = ''
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
@@ -49,4 +57,5 @@ export const authSlice = createSlice({
   },
 })
 
+export const { reset } = authSlice.actions
 export default authSlice.reducer

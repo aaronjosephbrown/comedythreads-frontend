@@ -6,11 +6,10 @@ import 'react-toastify/dist/ReactToastify.css'
 function App() {
   return (
     <Router>
-      <div className='h-screen'>
-        <Routes>
-          <Route path='/login' element={<Login />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path='/' element={<h1>Home</h1>} />
+        <Route path='/login' element={<Login />} />
+      </Routes>
       <ToastContainer />
     </Router>
   )

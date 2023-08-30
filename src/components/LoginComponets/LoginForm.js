@@ -1,14 +1,10 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { login } from '../../features/auth/authSlice'
 
-const LoginForm = () => {
+const LoginForm = ({dispatch, login}) => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   })
-
-  const dispatch = useDispatch()
 
   const handleChange = (e) => {
     setFormData({
