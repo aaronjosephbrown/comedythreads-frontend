@@ -14,6 +14,9 @@ const authService = {
       }
       return response.data
   },
+  logout: () => {
+    localStorage.removeItem('user')
+  }
 }
 
 export default authService

@@ -21,6 +21,12 @@ const Login = () => {
   }, [])
 
   useEffect(() => {
+    if (localStorage.getItem('user') !== null) {
+      navigate('/')
+    }
+  }, [user, navigate])
+
+  useEffect(() => {
     if (isError) {
       toast.error(errorMessage, {
         position: 'top-right',
@@ -40,9 +46,7 @@ const Login = () => {
   }, [isError, isSuccess, user, errorMessage, dispatch, navigate])
 
   if (isLoading) {
-    return (
-      <Loading />
-    )
+    return <Loading />
   } else {
     return (
       <div className='h-screen flex flex-col justify-between bg-[#101010]'>
