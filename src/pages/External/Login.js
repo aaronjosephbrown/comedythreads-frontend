@@ -1,12 +1,12 @@
-import logo from '../assets/img/comedy-thread-logo.png'
-import LoginForm from '../components/LoginComponets/LoginForm'
-import LoginFooter from '../components/LoginComponets/LoginFooter'
+import logo from '../../assets/img/comedy-thread-logo.png'
+import LoginForm from '../../components/LoginComponets/LoginForm'
+import LoginFooter from '../../components/LoginComponets/LoginFooter'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { login, reset } from '../features/auth/authSlice'
-import Loading from '../components/Loading/Loading'
+import { login, reset } from '../../features/auth/authSlice'
+import Loading from '../../components/Loading/Loading'
 
 const Login = () => {
   const { user, isError, isLoading, isSuccess, errorMessage } = useSelector(

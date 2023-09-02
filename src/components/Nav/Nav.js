@@ -1,5 +1,5 @@
 import logo from '../../assets/img/comedy-thread-logo.png'
-import profile from '../../assets/img/profile.png'
+import ProfileImage from '../Profile/ProfileImage'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
@@ -33,11 +33,7 @@ const Nav = () => {
           <li>
             <button onClick={onLogout}>Logout</button>
           </li>
-          <img
-            src={profile}
-            alt='Comedy Thread Logo'
-            className='object-center w-10 h-10 rounded-full'
-          />
+          <ProfileImage height={14} />
         </ul>
       </div>
     </nav>
