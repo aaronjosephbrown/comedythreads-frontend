@@ -1,9 +1,7 @@
-import UploadAvatar from '../../components/Profile/UploadAvatar'
-
 const Threads = () => {
   return (
-    <div className='bg-[#101010] h-screen'>
-      <UploadAvatar />
+    <div className='bg-[#f3f5f7] h-screen'>
+      
     </div>
   )
 }

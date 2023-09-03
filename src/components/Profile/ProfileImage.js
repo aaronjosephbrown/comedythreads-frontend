@@ -1,11 +1,6 @@
 import { UserIcon } from '@heroicons/react/24/solid'
 
 const ProfileImage = ({ h = 14, w = 'auto' }) => {
-
-  const ProfileImageContainer = ({ children }) => {
-    return <div className='p-5'>{children}</div>
-  }
-
   if (localStorage.getItem('user') !== null) {
     return (
       <img
@@ -17,11 +12,9 @@ const ProfileImage = ({ h = 14, w = 'auto' }) => {
   }
 
   return (
-    <ProfileImageContainer>
-      <UserIcon
-        className={`rounded-full outline outline-white text-white h-${h}`}
-      />
-    </ProfileImageContainer>
+    <UserIcon
+      className={`rounded-full outline outline-white text-white h-${h}`}
+    />
   )
 }
 

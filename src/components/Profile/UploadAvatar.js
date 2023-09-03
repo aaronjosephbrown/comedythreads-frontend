@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import axios from 'axios'
-import ProfileImage from './ProfileImage'
+//import ProfileImage from './ProfileImage'
 
 const UploadAvatar = () => {
   const [file, setFile] = useState(null)
-  const [profileImage, setProfileImage] = useState(null)
+  //const [profileImage, setProfileImage] = useState(null)
 
   const submit = async (e) => {
     e.preventDefault()
@@ -26,7 +26,7 @@ const UploadAvatar = () => {
     )
 
     if (data.avatarUrl) {
-      setProfileImage(data.avatarUrl)
+      //setProfileImage(data.avatarUrl)
     } else {
       console.log(data)
     }
