@@ -9,6 +9,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   errorMessage: '',
+  avatarUrl: '',
 }
 
 // Thunk for logging in user.
@@ -32,7 +33,7 @@ export const login = createAsyncThunk(
 
 // Thunk for logging out user.
 export const logout = createAsyncThunk('auth/logout', async () => {
-  await authService.logout()
+  authService.logout()
 })
 
 export const authSlice = createSlice({

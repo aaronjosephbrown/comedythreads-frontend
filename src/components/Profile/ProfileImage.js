@@ -1,34 +1,25 @@
-import { useState, useEffect } from 'react'
 import { UserIcon } from '@heroicons/react/24/solid'
-import axios from 'axios'
 
-const ProfileImage = ({ height = 14 }) => {
-  const [profileImage, setProfileImage] = useState(null)
-
-  useEffect(() => {
-    setProfileImage(`https://i.pravatar.cc/150?img=3`)
-  }, [setProfileImage])
+const ProfileImage = ({ h = 14, w = 'auto' }) => {
 
   const ProfileImageContainer = ({ children }) => {
     return <div className='p-5'>{children}</div>
   }
 
-  if (profileImage) {
+  if (localStorage.getItem('user') !== null) {
     return (
-      <ProfileImageContainer>
-        <img
-          className={`rounded-full outline outline-white h-${height}`}
-          src={profileImage}
-          alt='profileImage'
-        />
-      </ProfileImageContainer>
+      <img
+        className={`h-${h} w-${w} rounded-full`}
+        src={JSON.parse(localStorage.getItem('user')).avatar}
+        alt={''}
+      />
     )
   }
 
   return (
     <ProfileImageContainer>
       <UserIcon
-        className={`rounded-full outline outline-white text-white h-${height}`}
+        className={`rounded-full outline outline-white text-white h-${h}`}
       />
     </ProfileImageContainer>
   )
