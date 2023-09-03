@@ -4,6 +4,7 @@ import ProfileImage from './ProfileImage'
 
 const UploadAvatar = () => {
   const [file, setFile] = useState(null)
+  const [profileImage, setProfileImage] = useState(null)
 
   const submit = async (e) => {
     e.preventDefault()
@@ -23,7 +24,12 @@ const UploadAvatar = () => {
       formData,
       config
     )
-    console.log(data)
+
+    if (data.avatarUrl) {
+      setProfileImage(data.avatarUrl)
+    } else {
+      console.log(data)
+    }
   }
 
   const handleFileChange = (e) => {
@@ -43,7 +49,7 @@ const UploadAvatar = () => {
         />
         <label htmlFor='fileInput' className='custom-file-label'>
           <div className='hover:scale-125'>
-            <ProfileImage height={24}/>
+            <img className='rounded-full h-14' src={profileImage} alt='profileImage' />
           </div>
         </label>
         <button onClick={submit} className='font-bold py-2 px-4 rounded-2xl bg-white text-black'>

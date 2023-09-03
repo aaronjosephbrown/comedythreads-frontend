@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { UserIcon } from '@heroicons/react/24/solid'
+import axios from 'axios'
 
 const ProfileImage = ({ height = 14 }) => {
   const [profileImage, setProfileImage] = useState(null)
