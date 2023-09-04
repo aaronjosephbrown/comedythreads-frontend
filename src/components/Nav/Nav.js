@@ -16,7 +16,7 @@ function classNames(...classes) {
 }
 
 const Nav = () => {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user } = useSelector((state) => state.auth)
@@ -54,13 +54,13 @@ const Nav = () => {
                   <NavLink to='/'>
                     <div className='flex flex-shrink-0 items-center'>
                       <img
-                        className='h-8 w-auto'
+                        className='h-12 w-auto'
                         src={logo}
                         alt='Comedy Threads'
                       />
                     </div>
                   </NavLink>
-                  <div className='hidden sm:ml-6 sm:block'>
+                  <div className='hidden sm:ml-6 sm:flex sm:items-center '>
                     <div className='flex space-x-4'>
                       {navigation.map((item) => (
                         <NavLink
@@ -87,7 +87,7 @@ const Nav = () => {
                   >
                     <span className='absolute -inset-1.5' />
                     <span className='sr-only'>View notifications</span>
-                    <BellIcon className='h-6 w-6' aria-hidden='true' />
+                    <BellIcon className='h-10 w-auto' aria-hidden='true' />
                   </button>
 
                   {/* Profile dropdown */}
@@ -96,7 +96,7 @@ const Nav = () => {
                       <Menu.Button className='relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
                         <span className='absolute -inset-1.5' />
                         <span className='sr-only'>Open user menu</span>
-                        <ProfileImage h={8} />
+                        <ProfileImage h={10} />
                       </Menu.Button>
                     </div>
                     <Transition

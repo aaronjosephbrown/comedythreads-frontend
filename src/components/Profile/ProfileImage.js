@@ -1,11 +1,29 @@
 import { UserIcon } from '@heroicons/react/24/solid'
+import { useState, useEffect } from 'react'
 
 const ProfileImage = ({ h = 14, w = 'auto' }) => {
-  if (localStorage.getItem('user') !== null) {
+  const user = localStorage.getItem('user')
+  const parsedUser = user ? JSON.parse(user) : null
+
+  const [profileImage, setProfileImage] = useState(null)
+
+  useEffect(() => {
+    if (
+      parsedUser &&
+      parsedUser.avatar &&
+      parsedUser.avatar.startsWith('http')
+    ) {
+      setProfileImage(parsedUser.avatar)
+    } else {
+      setProfileImage(null)
+    }
+  }, [profileImage, parsedUser])
+
+  if (parsedUser) {
     return (
       <img
         className={`h-${h} w-${w} rounded-full`}
-        src={JSON.parse(localStorage.getItem('user')).avatar}
+        src={profileImage}
         alt={''}
       />
     )

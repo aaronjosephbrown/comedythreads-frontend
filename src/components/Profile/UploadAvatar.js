@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import axios from 'axios'
-//import ProfileImage from './ProfileImage'
 
-const UploadAvatar = () => {
-  const [file, setFile] = useState(null)
-  //const [profileImage, setProfileImage] = useState(null)
+const UploadAvatar = ({ setOpen }) => {
+  const user = localStorage.getItem('user');
+  const parsedUser = user ? JSON.parse(user) : null;
+  const initialAvatar = parsedUser ? parsedUser.avatar : null;
+
+  const [file, setFile] = useState(null);
+  const [profileImage, setProfileImage] = useState(initialAvatar);
 
   const submit = async (e) => {
     e.preventDefault()
@@ -24,20 +27,26 @@ const UploadAvatar = () => {
       formData,
       config
     )
-
-    if (data.avatarUrl) {
-      //setProfileImage(data.avatarUrl)
-    } else {
-      console.log(data)
+    const avatar = data.avatarUrl
+    if (avatar) {
+      setOpen(false)
     }
+
+    localStorage.setItem(
+      'user',
+      JSON.stringify({ ...JSON.parse(localStorage.getItem('user')), avatar })
+    )
+
+    setProfileImage(data.avatarUrl)
   }
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0])
+    setProfileImage(URL.createObjectURL(e.target.files[0]))
   }
 
   return (
-    <div className='flex flex-col items-center p-5'>
+    <div className='flex flex-col items-center justify-center p-5'>
       <form className='flex flex-col'>
         <input
           id='fileInput'
@@ -48,11 +57,23 @@ const UploadAvatar = () => {
           accept='image/*'
         />
         <label htmlFor='fileInput' className='custom-file-label'>
-          <div className='hover:scale-125'>
-            <img className='rounded-full h-14' src={profileImage} alt='profileImage' />
+          <div className='hover:scale-125 flex justify-center'>
+            <img
+              className='h-14 rounded-full'
+              src={
+                profileImage
+                  ? profileImage
+                  : JSON.parse(localStorage.getItem('user')).avatar
+              }
+              alt='profileImage'
+            />
           </div>
         </label>
-        <button onClick={submit} className='font-bold py-2 px-4 rounded-2xl bg-white text-black'>
+        <button
+          onClick={submit}
+          className='rounded-2xl px-4 py-2 font-bold text-black bg-white'
+          disabled={!file}
+        >
           Update Image
         </button>
       </form>
