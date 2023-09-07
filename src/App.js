@@ -8,15 +8,17 @@ import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   return (
-    <Router>
-      <Nav />
-      <Routes>
-        <Route path='/' element={<Threads />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/terms' element={<Terms />} />
-      </Routes>
-      <ToastContainer />
-    </Router>
+    <div className='bg-[#f3f5f7]'>
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path='/' element={<Threads />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/terms' element={<Terms />} />
+        </Routes>
+        <ToastContainer />
+      </Router>
+    </div>
   )
 }
 

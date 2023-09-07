@@ -1,7 +1,7 @@
 import { UserIcon } from '@heroicons/react/24/solid'
 import { useState, useEffect } from 'react'
 
-const ProfileImage = ({ h = 14, w = 'auto' }) => {
+const ProfileImage = ({ h, w = h }) => {
   const user = localStorage.getItem('user')
   const parsedUser = user ? JSON.parse(user) : null
 
@@ -22,7 +22,7 @@ const ProfileImage = ({ h = 14, w = 'auto' }) => {
   if (parsedUser) {
     return (
       <img
-        className={`h-${h} w-${w} rounded-full`}
+        className={`h-${h} w-${w} rounded-full object-fill`}
         src={profileImage}
         alt={''}
       />

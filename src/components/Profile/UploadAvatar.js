@@ -1,44 +1,29 @@
-import { useState } from 'react'
-import axios from 'axios'
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { updateAvatar } from '../../features/auth/authSlice'
 
 const UploadAvatar = ({ setOpen }) => {
-  const user = localStorage.getItem('user');
-  const parsedUser = user ? JSON.parse(user) : null;
-  const initialAvatar = parsedUser ? parsedUser.avatar : null;
-
+  
   const [file, setFile] = useState(null);
-  const [profileImage, setProfileImage] = useState(initialAvatar);
+  const [profileImage, setProfileImage] = useState('');
+  const dispatch = useDispatch();
+
+  const avatar = JSON.parse(localStorage.getItem('user')).avatar;
+
+  useEffect(() => {
+    setProfileImage(avatar)
+  }, [setProfileImage, avatar]);
 
   const submit = async (e) => {
     e.preventDefault()
     const formData = new FormData()
     formData.append('avatar', file)
-
-    const token = JSON.parse(localStorage.getItem('user')).token
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    }
-    const { data } = await axios.post(
-      'http://localhost:5001/api/users/avatar',
-      formData,
-      config
-    )
-    const avatar = data.avatarUrl
-    if (avatar) {
-      setOpen(false)
-    }
-
-    localStorage.setItem(
-      'user',
-      JSON.stringify({ ...JSON.parse(localStorage.getItem('user')), avatar })
-    )
-
-    setProfileImage(data.avatarUrl)
+    dispatch(updateAvatar(formData))
+    setOpen(false)
+    setFile(null)
   }
+
+
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0])
@@ -63,7 +48,7 @@ const UploadAvatar = ({ setOpen }) => {
               src={
                 profileImage
                   ? profileImage
-                  : JSON.parse(localStorage.getItem('user')).avatar
+                  : avatar
               }
               alt='profileImage'
             />

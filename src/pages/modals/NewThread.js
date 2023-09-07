@@ -1,8 +1,9 @@
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import UploadAvatar from '../../components/Profile/UploadAvatar'
+import ProfileImage from '../../components/Profile/ProfileImage'
 
-const ProfileUpdate = ({ open, setOpen }) => {
+const NewThread = ({ open, setOpen }) => {
+  const user = JSON.parse(localStorage.getItem('user'))
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as='div' className='relative z-10' onClose={setOpen}>
@@ -32,10 +33,13 @@ const ProfileUpdate = ({ open, setOpen }) => {
               <Dialog.Panel className='sm:my-8 sm:w-full sm:max-w-sm sm:p-6 relative px-4 pt-5 pb-4 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl'>
                 <div>
                   <div className='flex items-start'>
-                    <h1>Profile photo</h1>
+                    <div className='flex space-x-2'>
+                      <ProfileImage h={10} />
+                      <h2>{user.username}</h2>
+                    </div>
                   </div>
                   <div className='flex items-center justify-center'>
-                    <UploadAvatar setOpen={setOpen} />
+                    
                   </div>
                 </div>
               </Dialog.Panel>
@@ -47,4 +51,4 @@ const ProfileUpdate = ({ open, setOpen }) => {
   )
 }
 
-export default ProfileUpdate
+export default NewThread

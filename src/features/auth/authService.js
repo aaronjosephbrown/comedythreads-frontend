@@ -17,6 +17,23 @@ const authService = {
   logout: () => {
     localStorage.removeItem('user')
   },
+
+  updatedAvatar: async (newAvater) => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    const token = user.token
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+   
+      const { data } = await axios.post(`${API_URL}/avatar`, newAvater, config)
+      if (data) {
+        const avatar = data.avatar
+        localStorage.setItem('user', JSON.stringify({ ...user, avatar }))
+      }
+  }
 }
 
 export default authService

@@ -9,7 +9,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   errorMessage: '',
-  avatarUrl: '',
+  avatar: '',
 }
 
 // Thunk for logging in user.
@@ -26,7 +26,7 @@ export const login = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString()
-        console.log(message)
+      console.log(message)
       return thunkAPI.rejectWithValue({ message })
     }
   }
@@ -36,6 +36,37 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk('auth/logout', async () => {
   authService.logout()
 })
+
+// Thunk for updating user profile including avatar.
+export const updateProfile = createAsyncThunk(
+  'auth/updateProfile',
+  async (updatedUserData, thunkAPI) => {
+    try {
+      // Call your API to update the user profile
+      const updatedUser = await authService.updatedUser(updatedUserData)
+
+      return updatedUser
+    } catch (error) {
+      // Handle errors
+      return thunkAPI.rejectWithValue({ message: error.message })
+    }
+  }
+)
+
+export const updateAvatar = createAsyncThunk(
+  'auth/updateAvatar',
+  async (newAvatar, thunkAPI) => {
+    try {
+      // Call your API to update the user profile
+      const updatedAvatar = await authService.updatedAvatar(newAvatar)
+
+      return updatedAvatar
+    } catch (error) {
+      console.log(error)
+      return thunkAPI.rejectWithValue({ message: error.message })
+    }
+  }
+)
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -66,8 +97,22 @@ export const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.user = null
       })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.user = action.payload
+      })
+      .addCase(updateAvatar.fulfilled, (state, action) => {
+        state.user = action.payload
+      })
+      .addCase(updateAvatar.rejected, (state, action) => {
+        state.isError = true
+        state.errorMessage = action.payload.message
+      })
+      .addCase(updateProfile.pending, (state, action) => {
+        state.isLoading = true
+      })
   },
 })
 
 export const { reset } = authSlice.actions
+
 export default authSlice.reducer
