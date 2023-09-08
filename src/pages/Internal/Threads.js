@@ -20,14 +20,14 @@ const Threads = () => {
   }
 
   return (
-    <div className='sm:px-6 lg:px-8 max-w-3xl px-2 mx-auto text-black'>
-      <div className='bg-[#f3f5f7] h-screen max-w-7xl'>
+    <div className='sm:px-6 lg:px-8 max-w-3xl px-2 mx-auto text-white'>
+      <div className='h-screen max-w-7xl'>
         <div className='h-30 grid grid-cols-3 mt-6'>
           <div className='flex h-32'>
             <ProfileImage />
           </div>
           <div>
-            <h1 className='text-md font-semibold text-black'>{username}</h1>
+            <h1 className='text-md font-semibold'>{username}</h1>
           </div>
         </div>
         <div className='h-30 mt-6'>
@@ -37,7 +37,7 @@ const Threads = () => {
                 threads.toReversed().map((thread) => (
                   <li
                     key={thread._id}
-                    className='text-md font-semibold border-t'
+                    className='text-md font-semibold border-t border-[#777777] pt-2'
                   >
                     {thread.text}
                   </li>

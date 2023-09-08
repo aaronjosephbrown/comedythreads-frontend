@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   return (
-    <div className='bg-[#f3f5f7]'>
+    <div className='bg-[#101010]'>
       <Router>
         <Nav />
         <Routes>

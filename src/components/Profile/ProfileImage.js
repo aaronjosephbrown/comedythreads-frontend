@@ -22,7 +22,7 @@ const ProfileImage = ({ h, w = h }) => {
   if (parsedUser) {
     return (
       <img
-        className={`h-${h} w-${w} rounded-full object-fill`}
+        className={`h-${4} w-${w} rounded-full object-fill`}
         src={profileImage}
         alt={''}
       />

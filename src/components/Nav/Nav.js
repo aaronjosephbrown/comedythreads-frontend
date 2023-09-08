@@ -118,7 +118,9 @@ const Nav = () => {
                         <Menu.Button className='focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 relative flex text-sm bg-gray-800 rounded-full'>
                           <span className='absolute -inset-1.5' />
                           <span className='sr-only'>Open user menu</span>
-                          <ProfileImage h={10} />
+                          <div className='flex h-10 w-auto'>
+                            <ProfileImage />
+                          </div>
                         </Menu.Button>
                       </div>
                       <Transition
