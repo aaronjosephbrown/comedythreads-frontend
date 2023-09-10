@@ -40,8 +40,13 @@ const Nav = () => {
       name: 'Home',
       current: true,
       component: (
-        <NavLink>
-          <HomeIcon className='h-8 text-white' />
+        <NavLink
+          to='/'
+          className={({ isActive }) =>
+            isActive ? 'text-white' : 'h-8 text-[#777777]'
+          }
+        >
+          <HomeIcon className='h-8' />
         </NavLink>
       ),
     },
@@ -54,7 +59,7 @@ const Nav = () => {
       name: 'Post',
       current: true,
       component: (
-        <button onClick={()=>setOpenNT(true)}>
+        <button onClick={() => setOpenNT(true)}>
           <PencilSquareIcon className='h-8 text-[#777777]' />
         </button>
       ),
@@ -67,11 +72,18 @@ const Nav = () => {
     {
       name: 'Profile',
       current: true,
-      component: <UserIcon className='h-8 text-[#777777]' />,
+      component: (
+        <NavLink
+          to='/profile'
+          className={({ isActive }) =>
+            isActive ? 'text-white' : 'h-8 text-[#777777]'
+          }
+        >
+          <UserIcon className='h-8' />{' '}
+        </NavLink>
+      ),
     },
   ]
-
-
 
   const onLogout = () => {
     dispatch(logout())
@@ -126,7 +138,7 @@ const Nav = () => {
                         <Menu.Button className='focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 relative flex text-sm bg-gray-800 rounded-full'>
                           <span className='absolute -inset-1.5' />
                           <span className='sr-only'>Open user menu</span>
-                          <div className='flex h-8 w-auto'>
+                          <div className='flex w-auto h-8'>
                             <ProfileImage />
                           </div>
                         </Menu.Button>

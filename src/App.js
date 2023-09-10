@@ -3,6 +3,7 @@ import Login from './pages/External/Login'
 import Terms from './pages/External/Terms'
 import Threads from './pages/Internal/Threads'
 import Nav from './components/Nav/Nav'
+import Feed from './pages/Internal/Feed'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -12,7 +13,8 @@ function App() {
       <Router>
         <Nav />
         <Routes>
-          <Route path='/' element={<Threads />} />
+          <Route path='/' element={<Feed />} />
+          <Route path='/profile' element={<Threads />} />
           <Route path='/login' element={<Login />} />
           <Route path='/terms' element={<Terms />} />
         </Routes>
