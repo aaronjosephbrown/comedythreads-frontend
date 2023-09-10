@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   return (
-    <div className='bg-[#101010]'>
+    <div className='bg-[#101010] min-h-screen overflow-auto'>
       <Router>
         <Nav />
         <Routes>

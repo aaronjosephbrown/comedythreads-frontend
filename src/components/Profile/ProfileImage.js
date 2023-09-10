@@ -1,10 +1,12 @@
 import { UserIcon } from '@heroicons/react/24/solid'
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
-const ProfileImage = ({ h, w = h }) => {
-  const user = localStorage.getItem('user')
-  const parsedUser = user ? JSON.parse(user) : null
+const ProfileImage = () => {
+  const localuser = localStorage.getItem('user')
+  const parsedUser = localuser ? JSON.parse(localuser) : null
 
+  const { user } = useSelector((state) => state.auth)
   const [profileImage, setProfileImage] = useState(null)
 
   useEffect(() => {
@@ -13,16 +15,16 @@ const ProfileImage = ({ h, w = h }) => {
       parsedUser.avatar &&
       parsedUser.avatar.startsWith('http')
     ) {
-      setProfileImage(parsedUser.avatar)
+      setProfileImage(parsedUser.avatar || user.avatar)
     } else {
       setProfileImage(null)
     }
-  }, [profileImage, parsedUser])
+  }, [profileImage, parsedUser, user])
 
   if (parsedUser) {
     return (
       <img
-        className={`h-${4} w-${w} rounded-full object-fill`}
+        className={`rounded-full object-fill`}
         src={profileImage}
         alt={''}
       />
@@ -31,7 +33,7 @@ const ProfileImage = ({ h, w = h }) => {
 
   return (
     <UserIcon
-      className={`rounded-full outline outline-white text-white h-${h}`}
+      className={`rounded-full outline outline-white text-white`}
     />
   )
 }

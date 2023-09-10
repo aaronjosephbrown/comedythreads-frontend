@@ -2,13 +2,31 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import ProfileImage from '../../components/Profile/ProfileImage'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { createThread } from '../../features/threads/threadSlice'
 
 const NewThread = ({ open, setOpen }) => {
   const [thread, setThread] = useState('')
-  const user = JSON.parse(localStorage.getItem('user'))
+  const isDisabled = thread.length === 0
+  const dispatch = useDispatch()
+  const user = JSON.parse(localStorage.getItem('user')) || null
 
   const onInput = (e) => {
-    setThread(e.target.innerText)
+    setThread(e.target.textContent)
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    dispatch(createThread({ text: thread }))
+    setOpen(false)
+  }
+
+  const onPaste = (e) => {
+    e.preventDefault()
+
+    navigator.clipboard.readText().then((clipText) => {
+      document.getElementById('newThread').innerText += clipText
+    })
   }
 
   return (
@@ -47,15 +65,29 @@ const NewThread = ({ open, setOpen }) => {
                         </div>
                         <div className='flex flex-col items-start'>
                           <h2 className='text-[#ffffff]'>
-                            {user.username}
+                            {user?.username || 'Anonymous'}
                           </h2>
-                          <span
+                          <div
+                            id='newThread'
                             role='textbox'
                             onInput={onInput}
-                            className='customSpan border-none resize-none outline-none focus:ring-transparent bg-[#181818] text-[#ffffff] text-left'
+                            onPaste={onPaste}
+                            className='customSpan border-none resize-none outline-none focus:ring-transparent bg-[#181818] text-[#ffffff] text-left w-[500px] h-auto font-thin'
                             contentEditable='true'
-                          >
-                          </span>
+                          ></div>
+                          <div className='text-stone-600 flex justify-end w-full'>
+                            <button
+                              onClick={onSubmit}
+                              className={
+                                isDisabled
+                                  ? 'outline rounded-xl px-4 py-1 mt-10'
+                                  : 'outline outline-[#ffffff] text-[#ffffff] rounded-xl px-4 py-1 mt-10'
+                              }
+                              disabled={isDisabled}
+                            >
+                              Post
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>

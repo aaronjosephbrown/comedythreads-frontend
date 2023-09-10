@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -28,6 +28,12 @@ const Nav = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (user === null) {
+      navigate('/login')
+    }
+  }, [user, navigate])
 
   const navigation = [
     {
@@ -64,6 +70,8 @@ const Nav = () => {
       component: <UserIcon className='h-8 text-[#777777]' />,
     },
   ]
+
+
 
   const onLogout = () => {
     dispatch(logout())
@@ -118,7 +126,7 @@ const Nav = () => {
                         <Menu.Button className='focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 relative flex text-sm bg-gray-800 rounded-full'>
                           <span className='absolute -inset-1.5' />
                           <span className='sr-only'>Open user menu</span>
-                          <div className='flex h-10 w-auto'>
+                          <div className='flex h-8 w-auto'>
                             <ProfileImage />
                           </div>
                         </Menu.Button>

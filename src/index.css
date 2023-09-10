@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 .customSpan[contenteditable]:empty::before {
-  content: "Placeholder still possible";
+  content: "Start a thread...";
   color: gray;
 }

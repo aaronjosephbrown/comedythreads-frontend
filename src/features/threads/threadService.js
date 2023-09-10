@@ -13,6 +13,16 @@ const threadService = {
       }
     })
     return response.data
+  },
+
+  createThread: async (thread) => {
+    const token = JSON.parse(localStorage.getItem('user')).token
+    const response = await axios.post(`${API_URL}`, thread, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return response.data
   }
 }
 

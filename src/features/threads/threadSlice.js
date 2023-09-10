@@ -29,6 +29,26 @@ export const getThreadsByUser = createAsyncThunk(
   }
 )
 
+// Thunk for creating a thread.
+export const createThread = createAsyncThunk(
+  'threads/createThread',
+  async (thread, thunkAPI) => {
+    try {
+      return await threadService.createThread(thread)
+    } catch (error) {
+      const message =
+        error.response.data.errors[0].msg ||
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      console.log(message)
+      return thunkAPI.rejectWithValue({ message })
+    }
+  }
+)
+
 export const threadSlice = createSlice({
   name: 'threads',
   initialState,
@@ -60,6 +80,25 @@ export const threadSlice = createSlice({
         state.isLoading = false
         state.isSuccess = false
         state.errorMessage = action.payload.message
+      })
+      .addCase(createThread.pending, (state) => {
+        state.isError = false
+        state.isLoading = true
+        state.isSuccess = false
+        state.errorMessage = ''
+      })
+      .addCase(createThread.rejected, (state, action) => {
+        state.isError = true
+        state.isLoading = false
+        state.isSuccess = false
+        state.errorMessage = action.payload.message
+      })
+      .addCase(createThread.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.errorMessage = '';
+        state.threads = [...state.threads, action.payload];  // Immutable way
       })
   },
 })
