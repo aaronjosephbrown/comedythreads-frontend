@@ -34,7 +34,12 @@ const threadService = {
   },
   deleteThread: async (threadId) => {
     const token = JSON.parse(localStorage.getItem('user')).token
-    const response = await axios.delete(`${API_URL}/${threadId}`, {})
+    const response = await axios.delete(`${API_URL}/${threadId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return response.data
   },
 }
 

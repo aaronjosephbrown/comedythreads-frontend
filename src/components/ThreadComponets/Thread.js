@@ -1,6 +1,6 @@
-import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline'
 import ProfileImage from '../Profile/ProfileImage'
 import { timeSince } from '../../utils/timeSince'
+import ThreadDropMenu from './ThreadDropMenu'
 
 const Thread = ({threads, username}) => {
   return (
@@ -22,11 +22,11 @@ const Thread = ({threads, username}) => {
                     <span>{thread.text}</span>
                   </div>
                 </div>
-                <div className=' flex pl-20'>
+                <div className='flex pl-20'>
                   <span className='whitespace-nowrap text-stone-500 font-medium'>
                     {timeSince(thread.createdAt)}
                   </span>{' '}
-                  <EllipsisHorizontalIcon className='w-5 h-5 ml-2' />
+                  <ThreadDropMenu threadId={thread._id}/>
                 </div>
               </li>
             ))}

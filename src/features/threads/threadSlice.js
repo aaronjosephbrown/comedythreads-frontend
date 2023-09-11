@@ -30,6 +30,25 @@ export const getThreadsByUser = createAsyncThunk(
   }
 )
 
+export const deleteThread = createAsyncThunk(
+  'threads/deleteThread',
+  async (threadId, thunkAPI) => {
+    try {
+      return await threadService.deleteThread(threadId)
+    } catch (error) {
+      const message =
+        error.response.data.errors[0].msg ||
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      console.log(message)
+      return thunkAPI.rejectWithValue({ message })
+    }
+  }
+)
+
 // Thunk for creating a thread.
 export const createThread = createAsyncThunk(
   'threads/createThread',
@@ -139,6 +158,21 @@ export const threadSlice = createSlice({
         state.isLoading = false
         state.isSuccess = false
         state.errorMessage = action.payload.message
+      })
+      .addCase(deleteThread.pending, (state) => {
+        state.isError = false
+        state.isLoading = true
+        state.isSuccess = false
+        state.errorMessage = ''
+      })
+      .addCase(deleteThread.fulfilled, (state, action) => {
+        state.isError = false
+        state.isLoading = false
+        state.isSuccess = true
+        state.errorMessage = ''
+        state.threads = state.threads.filter(
+          (thread) => thread._id !== action.payload._id
+        )
       })
   },
 })
