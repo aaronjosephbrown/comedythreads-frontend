@@ -2,9 +2,6 @@ import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline'
 import ProfileImage from '../Profile/ProfileImage'
 import { timeSince } from '../../utils/timeSince'
 
-
-
-
 const Thread = ({threads, username}) => {
   return (
     <div className='h-30 mt-6'>
