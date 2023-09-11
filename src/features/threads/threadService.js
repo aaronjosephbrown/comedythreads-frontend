@@ -23,6 +23,16 @@ const threadService = {
       }
     })
     return response.data
+  },
+
+  getThreadsByAllUsers: async () => {
+    const token = JSON.parse(localStorage.getItem('user')).token
+    const response = await axios.get(`${API_URL}/all`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return response.data
   }
 }
 
