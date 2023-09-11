@@ -136,8 +136,6 @@ const Nav = () => {
                     <Menu as='div' className='relative ml-3'>
                       <div>
                         <Menu.Button className='focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 relative flex text-sm bg-gray-800 rounded-full'>
-                          <span className='absolute -inset-1.5' />
-                          <span className='sr-only'>Open user menu</span>
                           <div className='flex w-auto h-8'>
                             <ProfileImage />
                           </div>

@@ -1,7 +1,7 @@
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline'
 import { timeSince } from '../../utils/timeSince'
 
-const ThreadFeed = ({threads}) => {
+const ThreadFeed = ({ threads }) => {
   return (
     <div className='h-30 mt-6'>
       <div className='flex flex-col h-32'>
@@ -14,18 +14,23 @@ const ThreadFeed = ({threads}) => {
               >
                 <div className='py-3'>
                   <div className='whitespace-nowrap flex h-10 pr-5 -mb-5'>
-                    <img src={thread.avatar} alt='profile' className='w-10 h-10 rounded-full' />
-                    <span className='ml-2 font-semibold'>{thread.username}</span>
+                    <img
+                      src={thread.avatar}
+                      alt='profile'
+                      className='w-10 h-10 rounded-full'
+                    />
+                    <span className='ml-2 font-semibold'>
+                      {thread.username}
+                    </span>
                   </div>
                   <div className='pl-12'>
                     <span>{thread.text}</span>
                   </div>
                 </div>
-                <div className=' flex pl-20'>
+                <div className='flex pl-20'>
                   <span className='whitespace-nowrap text-stone-500 font-medium'>
                     {timeSince(thread.createdAt)}
                   </span>{' '}
-                  <EllipsisHorizontalIcon className='w-5 h-5 ml-2' />
                 </div>
               </li>
             ))}
