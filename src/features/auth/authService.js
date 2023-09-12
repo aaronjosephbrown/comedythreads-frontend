@@ -27,13 +27,36 @@ const authService = {
         'Content-Type': 'multipart/form-data',
       },
     }
-   
-      const { data } = await axios.post(`${API_URL}/avatar`, newAvater, config)
-      if (data) {
-        const avatar = data.avatar
-        localStorage.setItem('user', JSON.stringify({ ...user, avatar }))
-      }
-  }
+
+    const { data } = await axios.post(`${API_URL}/avatar`, newAvater, config)
+    if (data) {
+      const avatar = data.avatar
+      localStorage.setItem('user', JSON.stringify({ ...user, avatar }))
+    }
+  },
+  register: async ({
+    username,
+    firstname,
+    lastname,
+    DOB,
+    email,
+    password,
+    confirmPassword,
+  }) => {
+    const response = await axios.post(`${API_URL}/register`, {
+      username,
+      firstname,
+      lastname,
+      DOB,
+      email,
+      password,
+      confirmPassword,
+    })
+    if (response.data) {
+      localStorage.setItem('user', JSON.stringify(response.data))
+    }
+    return response.data
+  },
 }
 
 export default authService

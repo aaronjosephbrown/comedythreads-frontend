@@ -29,12 +29,6 @@ const Nav = () => {
   const navigate = useNavigate()
   const { user } = useSelector((state) => state.auth)
 
-  useEffect(() => {
-    if (user === null) {
-      navigate('/login')
-    }
-  }, [user, navigate])
-
   const navigation = [
     {
       name: 'Home',
@@ -136,7 +130,7 @@ const Nav = () => {
                     <Menu as='div' className='relative ml-3'>
                       <div>
                         <Menu.Button className='focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 relative flex text-sm bg-gray-800 rounded-full'>
-                          <div className='flex w-auto h-8'>
+                          <div className='flex w-auto h-10'>
                             <ProfileImage />
                           </div>
                         </Menu.Button>

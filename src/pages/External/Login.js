@@ -4,7 +4,7 @@ import LoginFooter from '../../components/LoginComponets/LoginFooter'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { login, reset } from '../../features/auth/authSlice'
 import Loading from '../../components/Loading/Loading'
 
@@ -50,11 +50,11 @@ const Login = () => {
   } else {
     return (
       <div className='h-screen flex flex-col justify-between bg-[#101010]'>
-        <div className='flex h-5/6 justify-center items-center'>
-          <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
+        <div className='h-5/6 flex items-center justify-center'>
+          <div className='lg:px-8 flex flex-col justify-center flex-1 min-h-full px-6 py-12'>
             <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
               <img
-                className='mx-auto h-20 w-auto'
+                className='w-auto h-20 mx-auto'
                 src={logo}
                 alt='Comedy Threads'
               />
@@ -64,6 +64,16 @@ const Login = () => {
             </div>
             <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
               <LoginForm dispatch={dispatch} login={login} />
+              <span className='flex justify-center items-center text-[#777777] pt-2'>
+                Don't have an account? &nbsp;
+                <Link
+                  to='/register'
+                  className='font-bold hover:text-[#f3f5f7]'
+                >
+                  {' '}
+                  Register here.
+                </Link>
+              </span>
             </div>
           </div>
         </div>
