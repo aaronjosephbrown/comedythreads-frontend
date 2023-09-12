@@ -1,4 +1,3 @@
-import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline'
 import { timeSince } from '../../utils/timeSince'
 
 const ThreadFeed = ({ threads }) => {
