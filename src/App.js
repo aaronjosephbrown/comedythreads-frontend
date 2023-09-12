@@ -5,6 +5,7 @@ import Threads from './pages/Internal/Threads'
 import Nav from './components/Nav/Nav'
 import Feed from './pages/Internal/Feed'
 import Register from './pages/External/Register'
+import Footer from './components/Footer/Footer'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import ProtectedRoute from './pages/ProtectRoute'
@@ -23,6 +24,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/terms' element={<Terms />} />
         </Routes>
+        <Footer />
         <ToastContainer />
       </Router>
     </div>

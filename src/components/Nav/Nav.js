@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -130,7 +130,7 @@ const Nav = () => {
                     <Menu as='div' className='relative ml-3'>
                       <div>
                         <Menu.Button className='focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 relative flex text-sm bg-gray-800 rounded-full'>
-                          <div className='flex w-auto h-10'>
+                          <div className='flex w-auto h-8'>
                             <ProfileImage />
                           </div>
                         </Menu.Button>

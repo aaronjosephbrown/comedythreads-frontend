@@ -1,6 +1,8 @@
 import { timeSince } from '../../utils/timeSince'
+import { UserIcon } from '@heroicons/react/24/outline'
 
 const ThreadFeed = ({ threads }) => {
+
   return (
     <div className='h-30 mt-6'>
       <div className='flex flex-col h-32'>
@@ -13,11 +15,15 @@ const ThreadFeed = ({ threads }) => {
               >
                 <div className='py-3'>
                   <div className='whitespace-nowrap flex h-10 pr-5 -mb-5'>
-                    <img
-                      src={thread.avatar}
-                      alt='profile'
-                      className='w-10 h-10 rounded-full'
-                    />
+                    {thread.avatar === '' ? (
+                      <UserIcon />
+                    ) : (
+                      <img
+                        src={thread.avatar}
+                        alt='profile'
+                        className='w-10 h-10 rounded-full'
+                      />
+                    )}
                     <span className='ml-2 font-semibold'>
                       {thread.username}
                     </span>
