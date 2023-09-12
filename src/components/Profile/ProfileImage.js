@@ -21,7 +21,7 @@ const ProfileImage = () => {
     }
   }, [profileImage, parsedUser, user])
 
-  if (parsedUser === null ) {
+  if (user.avatar !== null ) {
     return (
       <img
         className={`rounded-full object-fill`}

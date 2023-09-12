@@ -42,7 +42,7 @@ return (
       />
       <label htmlFor='fileInput' className='custom-file-label'>
         <div className='hover:scale-125 flex justify-center pb-1'>
-          {file === null ? (
+          {file === null && profileImage === null ? (
             <UserIcon className='h-14 w-14 outline rounded-full' />
           ) : (
             <div className="h-14 w-14 rounded-full overflow-hidden">
