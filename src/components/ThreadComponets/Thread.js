@@ -15,7 +15,9 @@ const Thread = ({threads, username}) => {
               >
                 <div className='py-3'>
                   <div className='whitespace-nowrap flex h-10 pr-5 -mb-5'>
+                    <div className='flex h-10'>
                     <ProfileImage />
+                    </div>
                     <span className='ml-2 font-semibold'>{username}</span>
                   </div>
                   <div className='pl-12'>

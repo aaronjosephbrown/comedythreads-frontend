@@ -42,7 +42,7 @@ return (
       />
       <label htmlFor='fileInput' className='custom-file-label'>
         <div className='hover:scale-125 flex justify-center pb-1'>
-          {file === null && profileImage === null ? (
+          {file === null && profileImage === '' ? (
             <UserIcon className='h-14 w-14 outline rounded-full' />
           ) : (
             <div className="h-14 w-14 rounded-full overflow-hidden">
@@ -57,7 +57,7 @@ return (
       </label>
       <button
         onClick={submit}
-        className='rounded-2xl px-4 py-2 font-bold text-black bg-white'
+        className='rounded-2xl px-4 py-2 font-bold text-black bg-white mt-4'
         disabled={!file}
       >
         Update Image

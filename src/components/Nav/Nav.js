@@ -15,8 +15,8 @@ import {
   HeartIcon,
   UserIcon,
 } from '@heroicons/react/24/outline'
-import ProfileUpdate from '../../pages/modals/ProfileUpdate'
-import NewThread from '../../pages/modals/NewThread'
+import ProfileUpdate from './Modal/ProfileUpdate'
+import NewThread from '../../pages/Modals/NewThread'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -144,14 +144,14 @@ const Nav = () => {
                         leaveFrom='transform opacity-100 scale-100'
                         leaveTo='transform opacity-0 scale-95'
                       >
-                        <Menu.Items className='ring-1 ring-black ring-opacity-5 focus:outline-none absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg'>
+                        <Menu.Items className='ring-1 ring-black ring-opacity-5 focus:outline-none absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-[#777777] rounded-md shadow-lg'>
                           <Menu.Item>
                             {({ active }) => (
                               <Menu.Button
                                 onClick={() => setOpen(true)}
                                 className={classNames(
-                                  active ? 'bg-gray-100' : '',
-                                  'block px-4 py-2 text-sm text-gray-700'
+                                  active ? 'bg-gray-200 rounded-lg text-black' : '',
+                                  'text-left w-full px-4 py-2 text-sm text-[#ffffff]'
                                 )}
                               >
                                 Your Profile
@@ -163,8 +163,8 @@ const Nav = () => {
                               <button
                                 onClick={onLogout}
                                 className={classNames(
-                                  active ? 'bg-gray-100' : '',
-                                  'block px-4 py-2 text-sm text-gray-700'
+                                  active ? 'bg-gray-200 rounded-lg text-black' : '',
+                                  'text-left w-full px-4 py-2 text-sm text-[#ffffff]'
                                 )}
                               >
                                 Log out

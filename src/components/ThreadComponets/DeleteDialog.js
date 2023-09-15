@@ -50,7 +50,7 @@ const DeleteDialog = ({isOpen, setIsOpen, handleDelete}) => {
                   <div className="mt-4">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-red-500 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-[#ffffff] px-4 py-2 text-sm font-medium text-red-500 hover:scale-110 focus:outline-none focus-visible:ring-2"
                       onClick={handleDelete}
                     >
                       Delete
