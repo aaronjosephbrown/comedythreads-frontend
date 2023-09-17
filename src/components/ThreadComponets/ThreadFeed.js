@@ -1,8 +1,8 @@
 import { timeSince } from '../../utils/timeSince'
 import { UserIcon } from '@heroicons/react/24/outline'
+import Like from './Like'
 
 const ThreadFeed = ({ threads }) => {
-
   return (
     <div className='h-30 mt-6'>
       <div className='flex flex-col h-32'>
@@ -30,6 +30,7 @@ const ThreadFeed = ({ threads }) => {
                   </div>
                   <div className='pl-12'>
                     <span>{thread.text}</span>
+                    <Like threadId={thread._id} />
                   </div>
                 </div>
                 <div className='flex pl-20'>

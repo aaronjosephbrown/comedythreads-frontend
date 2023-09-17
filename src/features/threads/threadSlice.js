@@ -49,6 +49,19 @@ export const deleteThread = createAsyncThunk(
   }
 )
 
+export const likeThread = createAsyncThunk(
+  'threads/likeThread',
+  async (threadId, thunkAPI) => {
+    try {
+      return await threadService.likeThread(threadId)
+    } catch (error) {
+      const message = error.response.data.message
+      console.log(error.response.data.message)
+      return thunkAPI.rejectWithValue({ message })
+    }
+  }
+)
+
 // Thunk for creating a thread.
 export const createThread = createAsyncThunk(
   'threads/createThread',
@@ -173,6 +186,33 @@ export const threadSlice = createSlice({
         state.threads = state.threads.filter(
           (thread) => thread._id !== action.payload._id
         )
+      })
+      .addCase(deleteThread.rejected, (state, action) => {
+        state.isError = true
+        state.isLoading = false
+        state.isSuccess = false
+        state.errorMessage = action.payload.message
+      })
+      .addCase(likeThread.pending, (state) => {
+        state.isError = false
+        state.isLoading = true
+        state.isSuccess = false
+        state.errorMessage = ''
+      })
+      .addCase(likeThread.fulfilled, (state, action) => {
+        state.isError = false
+        state.isLoading = false
+        state.isSuccess = true
+        state.errorMessage = ''
+        state.threads = state.threads.map((thread) =>
+          thread._id === action.payload._id ? action.payload : thread
+        )
+      })
+      .addCase(likeThread.rejected, (state, action) => {
+        state.isError = true
+        state.isLoading = false
+        state.isSuccess = false
+        state.errorMessage = action.payload.message
       })
   },
 })

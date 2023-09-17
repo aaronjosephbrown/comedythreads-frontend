@@ -1,8 +1,9 @@
 import ProfileImage from '../Profile/ProfileImage'
 import { timeSince } from '../../utils/timeSince'
 import ThreadDropMenu from './ThreadDropMenu'
+import Like from './Like'
 
-const Thread = ({threads, username}) => {
+const Thread = ({ threads, username }) => {
   return (
     <div className='h-30 mt-6'>
       <div className='flex flex-col h-32'>
@@ -16,19 +17,20 @@ const Thread = ({threads, username}) => {
                 <div className='py-3'>
                   <div className='whitespace-nowrap flex h-10 pr-5 -mb-5'>
                     <div className='flex h-10'>
-                    <ProfileImage />
+                      <ProfileImage />
                     </div>
                     <span className='ml-2 font-semibold'>{username}</span>
                   </div>
                   <div className='pl-12'>
                     <span>{thread.text}</span>
+                    <Like threadId={thread._id}/>
                   </div>
                 </div>
                 <div className='flex pl-20'>
                   <span className='whitespace-nowrap text-stone-500 font-medium'>
                     {timeSince(thread.createdAt)}
                   </span>{' '}
-                  <ThreadDropMenu threadId={thread._id}/>
+                  <ThreadDropMenu threadId={thread._id} />
                 </div>
               </li>
             ))}
