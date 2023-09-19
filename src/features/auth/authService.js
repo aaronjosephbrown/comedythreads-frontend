@@ -32,6 +32,7 @@ const authService = {
     if (data) {
       const avatar = data.avatar
       localStorage.setItem('user', JSON.stringify({ ...user, avatar }))
+      console.log(localStorage.getItem('user'))
     }
   },
   register: async ({

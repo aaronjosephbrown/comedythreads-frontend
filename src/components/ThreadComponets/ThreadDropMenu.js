@@ -1,17 +1,21 @@
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import { EllipsisHorizontalIcon, TrashIcon  } from '@heroicons/react/20/solid'
+import { Fragment, useState, useContext } from 'react'
+import { EllipsisHorizontalIcon, TrashIcon } from '@heroicons/react/20/solid'
 import { useDispatch } from 'react-redux'
 import { deleteThread } from '../../features/threads/threadSlice'
 import DeleteDialog from './DeleteDialog'
+import { refreshContext } from '../../features/context/RefreshContext'
 
-const ThreadDropMenu = ({threadId}) => {
+const ThreadDropMenu = ({ thread }) => {
+  const { setRefresh } = useContext(refreshContext)
   let [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
 
   const handleDelete = () => {
-    dispatch(deleteThread(threadId))
-    setIsOpen(false)
+    dispatch(deleteThread(thread._id)).then(() => {
+      setIsOpen(false)
+      setRefresh(true)
+    })
   }
 
   return (
@@ -39,18 +43,16 @@ const ThreadDropMenu = ({threadId}) => {
                     className={`${
                       active ? 'bg-[#ffffff] text-black' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={
-                      () => setIsOpen(true)
-                    }
+                    onClick={() => setIsOpen(true)}
                   >
                     {active ? (
                       <TrashIcon
-                        className='text-red-400 w-5 h-5 mr-2'
+                        className='w-5 h-5 mr-2 text-red-400'
                         aria-hidden='true'
                       />
                     ) : (
                       <TrashIcon
-                        className='text-red-400 w-5 h-5 mr-2'
+                        className='w-5 h-5 mr-2 text-red-400'
                         aria-hidden='true'
                       />
                     )}
@@ -62,12 +64,13 @@ const ThreadDropMenu = ({threadId}) => {
           </Menu.Items>
         </Transition>
       </Menu>
-      <DeleteDialog isOpen={isOpen} setIsOpen={setIsOpen} handleDelete={handleDelete} />
+      <DeleteDialog
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        handleDelete={handleDelete}
+      />
     </div>
   )
 }
-
-
-
 
 export default ThreadDropMenu

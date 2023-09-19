@@ -54,6 +54,19 @@ const threadService = {
       )
       return response.data
   },
+  unLikeThread: async (threadId) => {
+    const token = JSON.parse(localStorage.getItem('user')).token
+      const response = await axios.put(
+        `${API_URL}/unlike/${threadId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      return response.data
+  }
 }
 
 export default threadService

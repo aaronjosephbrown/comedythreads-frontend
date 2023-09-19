@@ -1,3 +1,4 @@
+import RefreshContextProvider from './features/context/RefreshContext'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Login from './pages/External/Login'
 import Terms from './pages/External/Terms'
@@ -12,22 +13,24 @@ import ProtectedRoute from './pages/ProtectRoute'
 
 function App() {
   return (
-    <div className='bg-[#101010] min-h-screen overflow-auto'>
-      <Router>
-        <Nav />
-        <Routes>
-          <Route path='/' element={<ProtectedRoute />}>
-            <Route index element={<Feed />} />
-            <Route path='profile' element={<Threads />} />
-          </Route>
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/terms' element={<Terms />} />
-        </Routes>
-        <Footer />
-        <ToastContainer />
-      </Router>
-    </div>
+    <RefreshContextProvider>
+      <div className='bg-[#101010] min-h-screen overflow-auto'>
+        <Router>
+          <Nav />
+          <Routes>
+            <Route path='/' element={<ProtectedRoute />}>
+              <Route index element={<Feed />} />
+              <Route path='profile' element={<Threads />} />
+            </Route>
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/terms' element={<Terms />} />
+          </Routes>
+          <Footer />
+          <ToastContainer />
+        </Router>
+      </div>
+    </RefreshContextProvider>
   )
 }
 

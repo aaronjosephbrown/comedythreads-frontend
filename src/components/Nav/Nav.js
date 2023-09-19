@@ -16,7 +16,7 @@ import {
   UserIcon,
 } from '@heroicons/react/24/outline'
 import ProfileUpdate from './Modal/ProfileUpdate'
-import NewThread from '../../pages/Modals/NewThread'
+import NewThreadModal from '../ThreadComponets/Modals/NewThreadModal'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -201,7 +201,7 @@ const Nav = () => {
         )}
       </Disclosure>
       <ProfileUpdate open={open} setOpen={setOpen} />
-      <NewThread open={openNT} setOpen={setOpenNT} />
+      <NewThreadModal open={openNT} setOpen={setOpenNT} />
     </nav>
   )
 }

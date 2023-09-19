@@ -1,15 +1,15 @@
-import { Fragment } from 'react'
+import { Fragment, useState, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import ProfileImage from '../../components/Profile/ProfileImage'
-import { useState } from 'react'
+import ProfileImage from '../../Profile/ProfileImage'
 import { useDispatch } from 'react-redux'
-import { createThread } from '../../features/threads/threadSlice'
+import { createThread } from '../../../features/threads/threadSlice'
+import { refreshContext } from '../../../features/context/RefreshContext'
 
-const NewThread = ({ open, setOpen }) => {
+const NewThreadModal = ({ open, setOpen }) => {
+  const { setRefresh, localUser } = useContext(refreshContext)
   const [thread, setThread] = useState('')
   const isDisabled = thread.length === 0
   const dispatch = useDispatch()
-  const user = JSON.parse(localStorage.getItem('user')) || null
 
   const onInput = (e) => {
     setThread(e.target.textContent)
@@ -17,8 +17,10 @@ const NewThread = ({ open, setOpen }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    dispatch(createThread({ text: thread }))
-    setOpen(false)
+    dispatch(createThread({ text: thread })).then(() => {
+      setRefresh(true)
+      setOpen(false)
+    })
   }
 
   const onPaste = (e) => {
@@ -65,7 +67,7 @@ const NewThread = ({ open, setOpen }) => {
                         </div>
                         <div className='flex flex-col items-start'>
                           <h2 className='text-[#ffffff]'>
-                            {user?.username || 'Anonymous'}
+                            {localUser?.username || 'Anonymous'}
                           </h2>
                           <div
                             id='newThread'
@@ -103,4 +105,4 @@ const NewThread = ({ open, setOpen }) => {
   )
 }
 
-export default NewThread
+export default NewThreadModal

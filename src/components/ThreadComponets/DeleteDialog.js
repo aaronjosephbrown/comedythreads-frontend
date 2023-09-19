@@ -1,9 +1,12 @@
 import { Transition, Dialog } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
+import { refreshContext } from '../../features/context/RefreshContext'
 
 const DeleteDialog = ({isOpen, setIsOpen, handleDelete}) => {
+  const { setRefresh } = useContext(refreshContext)
   
   function closeModal() {
+    setRefresh(true)
     setIsOpen(false)
   }
 
