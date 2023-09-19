@@ -1,15 +1,10 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useLocation } from 'react-router-dom'
 import ProfileImage from '../../Profile/ProfileImage'
 
-const CommentModal = ({ open, setOpen, thread }) => {
+const CommentModal = ({ open, setOpen, commentThread }) => {
   const location = useLocation()
-  const [localThread, setLocalThread] = useState(thread)
-
-  useEffect(() => {
-    setLocalThread(thread)
-  }, [thread])
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -42,16 +37,17 @@ const CommentModal = ({ open, setOpen, thread }) => {
                   <div className='flex items-start'>
                     {location.pathname === '/' ? (
                       <img
-                        src={localThread.avatar}
+                        src={commentThread.avatar}
                         alt='profile'
                         className='w-10 h-10 rounded-full'
                       />
                     ) : (
-                      <div className='flex h-10'>
+                      <div className='w-10 h-10 rounded-full'>
                         <ProfileImage />
                       </div>
                     )}
                   </div>
+                  <div className='flex justify-center text-[#ffffff]'>Comments Comming Soon!!!</div>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

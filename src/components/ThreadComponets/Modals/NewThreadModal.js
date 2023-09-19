@@ -20,6 +20,7 @@ const NewThreadModal = ({ open, setOpen }) => {
     dispatch(createThread({ text: thread })).then(() => {
       setRefresh(true)
       setOpen(false)
+      setThread('')
     })
   }
 

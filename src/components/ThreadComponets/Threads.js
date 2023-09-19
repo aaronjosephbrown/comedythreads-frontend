@@ -9,14 +9,32 @@ import CommentModal from './Modals/CommentModal'
 import { getThreadsByUser } from '../../features/threads/threadSlice'
 import { useDispatch } from 'react-redux'
 
-const Thread = ({ threads, username }) => {
+const Threads = ({ threads, username }) => {
   const [open, setOpen] = useState(false)
-
+  const [commentThread, setCommentThread] = useState({})
+  const [elapsedTimes, setElapsedTimes] = useState({})
   const dispatch = useDispatch()
-  
+
   useEffect(() => {
     dispatch(getThreadsByUser(username))
   }, [username, dispatch])
+
+  const updateElapsedTimes = () => {
+    const newElapsedTimes = {}
+    threads.forEach((thread) => {
+      newElapsedTimes[thread._id] = timeSince(thread.createdAt)
+    })
+    setElapsedTimes(newElapsedTimes)
+  }
+
+  useEffect(() => {
+    updateElapsedTimes()
+    const intervalId = setInterval(() => {
+      updateElapsedTimes()
+    }, 1000)
+    return () => clearInterval(intervalId)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [threads])
 
   return (
     <div className='h-30 mt-6'>
@@ -40,22 +58,30 @@ const Thread = ({ threads, username }) => {
                       <span>{thread.text}</span>
                       <ul className='flex gap-3 mt-2'>
                         <li className='flex gap-2'>
-                          <LikeButton thread={thread}/>
+                          <LikeButton thread={thread} />
                           <LikeCounter thread={thread} />
                         </li>
                         <li>
-                          <CommentButton setOpen={setOpen} />
+                          <CommentButton
+                            setOpen={setOpen}
+                            thread={thread}
+                            setCommentThread={setCommentThread}
+                          />
                         </li>
                       </ul>
                     </div>
                   </div>
                   <div className='flex pl-20'>
                     <span className='whitespace-nowrap text-stone-500 font-medium'>
-                      {timeSince(thread.createdAt)}
+                      {elapsedTimes[thread._id] || 'Just now'}
                     </span>{' '}
                     <ThreadDropMenu thread={thread} />
                   </div>
-                  <CommentModal open={open} setOpen={setOpen} thread={thread} />
+                  <CommentModal
+                    open={open}
+                    setOpen={setOpen}
+                    commentThread={commentThread}
+                  />
                 </>
               </li>
             ))}
@@ -64,4 +90,4 @@ const Thread = ({ threads, username }) => {
     </div>
   )
 }
-export default Thread
+export default Threads

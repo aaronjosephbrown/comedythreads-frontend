@@ -164,7 +164,7 @@ export const threadSlice = createSlice({
         state.isLoading = false
         state.isSuccess = true
         state.errorMessage = ''
-        state.threads = [...state.threads, action.payload] // Immutable way
+        state.threads = [...state.threads, action.payload]
       })
       .addCase(getThreadsByAllUsers.pending, (state) => {
         state.isError = false

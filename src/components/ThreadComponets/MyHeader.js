@@ -1,10 +1,10 @@
-import ProfileImage from '../Profile/ProfileImage'
+import MyImage from '../Profile/ProfileImage'
 
-const ThreadsHeader = ({ username, bio, joined }) => {
+const MyHeader = ({ username, bio, joined }) => {
   return (
     <section className='h-30 grid grid-cols-4 mt-6'>
       <div className='flex h-32'>
-        <ProfileImage />
+        <MyImage />
       </div>
       <div>
         <h1 className='text-md font-semibold'>{username}</h1>
@@ -16,4 +16,4 @@ const ThreadsHeader = ({ username, bio, joined }) => {
     </section>
   )
 }
-export default ThreadsHeader
+export default MyHeader
