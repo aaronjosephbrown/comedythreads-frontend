@@ -68,6 +68,19 @@ export const updateAvatar = createAsyncThunk(
   }
 )
 
+export const getUserByUsername = createAsyncThunk(
+  'auth/getUserByUsername',
+  async (username, thunkAPI) => {
+    try {
+      const user = await authService.getUserByUsername(username)
+      return user
+    } catch (error) {
+      console.log(error)
+      return thunkAPI.rejectWithValue({ message: error.message })
+    }
+  }
+)
+
 export const register = createAsyncThunk(
   'auth/register',
   async (
@@ -149,6 +162,15 @@ export const authSlice = createSlice({
       })
       .addCase(register.pending, (state, action) => {
         state.isLoading = true
+      })
+      .addCase(getUserByUsername.fulfilled, (state, action) => {
+        state.user = action.payload
+        state.isLoading = false
+      })
+      .addCase(getUserByUsername.rejected, (state, action) => {
+        state.isError = true
+        state.errorMessage = action.payload.message
+        state.isLoading = false
       })
   },
 })

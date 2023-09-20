@@ -57,6 +57,14 @@ const authService = {
     }
     return response.data
   },
+  getUserByUsername: async (username) => {
+    const response = await axios.get(`${API_URL}/${username}`,{
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}`,
+      },
+    })
+    return response.data
+  }
 }
 
 export default authService
