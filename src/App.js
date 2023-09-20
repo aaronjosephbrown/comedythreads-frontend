@@ -21,12 +21,12 @@ function App() {
           <Routes>
             <Route path='/' element={<ProtectedRoute />}>
               <Route index element={<Feed />} />
-              <Route path='profile' element={<Me />} />
+              <Route path='me' element={<Me />} />
               <Route path=':username' element={<Profile />} />
             </Route>
-            <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/terms' element={<Terms />} />
+            <Route path='register' element={<Register />} />
+            <Route path='login' element={<Login />} />
+            <Route path='terms' element={<Terms />} />
           </Routes>
           <ToastContainer />
           <Footer />

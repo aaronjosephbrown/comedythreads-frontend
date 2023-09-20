@@ -64,11 +64,11 @@ const Nav = () => {
       component: <HeartIcon className='h-8 text-[#777777]' />,
     },
     {
-      name: 'Profile',
+      name: 'Me',
       current: true,
       component: (
         <NavLink
-          to='/profile'
+          to='/me'
           className={({ isActive }) =>
             isActive ? 'text-white' : 'h-8 text-[#777777]'
           }

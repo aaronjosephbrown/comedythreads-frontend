@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { likeThread, unLikeThread } from '../../../features/threads/threadSlice'
 import { refreshContext } from '../../../features/context/RefreshContext'
 
-const LikeButton = ({ thread }) => {
+const LikeButton = ({ thread, profileThreads }) => {
   const [liked, setLiked] = useState(false)
   const { setRefresh, refresh, localUser } = useContext(refreshContext)
   const { user } = useSelector((state) => state.auth)
@@ -19,19 +19,23 @@ const LikeButton = ({ thread }) => {
 
   useEffect(() => {
     let localThreads
-
+    
     switch (location.pathname) {
       case '/':
         localThreads = allThreads.find((thread) => thread?._id === threadId)
         break
-      case '/profile':
+      case '/me':
         localThreads = threads.find((thread) => thread?._id === threadId)
         break
       default:
+        localThreads = profileThreads.find((thread) => thread?._id === threadId)
         break
     }
 
-    setLiked(localThreads?.likedBy?.includes(user?.id || localUser?.id) || false)
+    setLiked(
+      localThreads?.likedBy?.includes(user?.id || localUser?.id) || false
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     allThreads,
     threads,

@@ -10,6 +10,7 @@ const initialState = {
   isSuccess: false,
   errorMessage: '',
   avatar: '',
+  selectedProfile: {},
 }
 
 // Thunk for logging in user.
@@ -120,6 +121,7 @@ export const authSlice = createSlice({
       state.isLoading = false
       state.isSuccess = false
       state.errorMessage = ''
+      state.isPending = false
     },
   },
   extraReducers: (builder) => {
@@ -164,8 +166,12 @@ export const authSlice = createSlice({
         state.isLoading = true
       })
       .addCase(getUserByUsername.fulfilled, (state, action) => {
-        state.user = action.payload
+        state.selectedProfile = action.payload
         state.isLoading = false
+        state.isPending = false
+      })
+      .addCase(getUserByUsername.pending, (state, action) => {
+        state.isPending = true
       })
       .addCase(getUserByUsername.rejected, (state, action) => {
         state.isError = true

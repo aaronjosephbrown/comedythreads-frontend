@@ -1,22 +1,27 @@
 import { useState, useEffect } from 'react'
 import ProfileImage from '../Profile/ProfileImage'
 import { timeSince } from '../../utils/timeSince'
-import ThreadDropMenu from './ThreadDropMenu'
-import LikeButton from './Buttons/LikeButton'
-import LikeCounter from './LikeCounter'
-import CommentButton from './Buttons/CommentButton'
-import CommentModal from './Modals/CommentModal'
+import ThreadDropMenu from '../ThreadComponets/ThreadDropMenu'
+import LikeButton from '../ThreadComponets/Buttons/LikeButton'
+import LikeCounter from '../ThreadComponets/LikeCounter'
+import CommentButton from '../ThreadComponets/Buttons/CommentButton'
+import CommentModal from '../ThreadComponets/Modals/CommentModal'
 import { getThreadsByUser } from '../../features/threads/threadSlice'
 import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
-const Threads = ({ threads, username }) => {
+const MyThreads = ({ threads, username }) => {
   const [open, setOpen] = useState(false)
   const [commentThread, setCommentThread] = useState({})
   const [elapsedTimes, setElapsedTimes] = useState({})
   const dispatch = useDispatch()
+  const location = useLocation()
 
   useEffect(() => {
-    dispatch(getThreadsByUser(username))
+    if (location.pathname === '/me') {
+      dispatch(getThreadsByUser(username))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, dispatch])
 
   const updateElapsedTimes = () => {
@@ -90,4 +95,4 @@ const Threads = ({ threads, username }) => {
     </div>
   )
 }
-export default Threads
+export default MyThreads
