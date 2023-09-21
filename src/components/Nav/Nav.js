@@ -3,8 +3,9 @@ import ProfileImage from '../Profile/ProfileImage'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../../features/auth/authSlice'
+import { clearThreads } from '../../features/threads/threadSlice'
 import { useNavigate } from 'react-router-dom'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useContext } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -17,6 +18,7 @@ import {
 } from '@heroicons/react/24/outline'
 import ProfileUpdate from './Modal/ProfileUpdate'
 import NewThreadModal from '../ThreadComponets/Modals/NewThreadModal'
+import { refreshContext } from '../../features/context/RefreshContext'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -28,6 +30,7 @@ const Nav = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user } = useSelector((state) => state.auth)
+  const { clearContext } = useContext(refreshContext)
 
   const navigation = [
     {
@@ -82,6 +85,8 @@ const Nav = () => {
   const onLogout = () => {
     dispatch(logout())
     dispatch(reset())
+    dispatch(clearThreads())
+    clearContext()
     navigate('/login')
   }
 
@@ -154,7 +159,7 @@ const Nav = () => {
                                   'text-left w-full px-4 py-2 text-sm text-[#ffffff]'
                                 )}
                               >
-                                Your Profile
+                                Edit Profile
                               </Menu.Button>
                             )}
                           </Menu.Item>

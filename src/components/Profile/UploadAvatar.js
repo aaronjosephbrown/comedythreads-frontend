@@ -45,7 +45,7 @@ const UploadAvatar = ({ setOpen }) => {
         <label htmlFor='fileInput' className='custom-file-label'>
           <div className='hover:scale-125 flex justify-center pb-1'>
             {profileImage === '' || localUser.avatar === undefined ? (
-              <UserIcon className='h-14 w-14 outline rounded-full' />
+              <UserIcon className='h-14 w-14 outline rounded-full text-white' />
             ) : (
               <div className='h-14 w-14 overflow-hidden rounded-full'>
                 <img

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { timeSince } from '../../utils/timeSince'
-import { UserIcon } from '@heroicons/react/24/outline'
+import { UserIcon } from '@heroicons/react/24/solid'
 import LikeButton from './Buttons/LikeButton'
 import LikeCounter from './LikeCounter'
 import CommentButton from './Buttons/CommentButton'
@@ -53,7 +53,7 @@ const ThreadFeed = () => {
                 <div className='whitespace-nowrap flex h-10 pr-5 -mb-5'>
                   <Link to={thread.username}>
                     {thread.avatar === '' ? (
-                      <UserIcon />
+                      <UserIcon className='h-8 outline rounded-full' />
                     ) : (
                       <img
                         src={thread.avatar}

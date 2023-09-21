@@ -1,14 +1,15 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState, useContext} from 'react'
+import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { getUserByUsername } from '../../features/auth/authSlice'
 import LikeButton from '../../components/ThreadComponets/Buttons/LikeButton'
 import LikeCounter from '../../components/ThreadComponets/LikeCounter'
-import ThreadDropMenu from '../../components/ThreadComponets/ThreadDropMenu'
 import CommentButton from '../../components/ThreadComponets/Buttons/CommentButton'
 import CommentModal from '../../components/ThreadComponets/Modals/CommentModal'
 import { timeSince } from '../../utils/timeSince'
 import { refreshContext } from '../../features/context/RefreshContext'
+import Loading from '../../components/Loading/Loading'
 
 const Threads = () => {
   let { username } = useParams()
@@ -18,6 +19,7 @@ const Threads = () => {
   const [open, setOpen] = useState(false)
   const [commentThread, setCommentThread] = useState({})
   const { refresh } = useContext(refreshContext)
+  const { isLoading } = useSelector((state) => state.auth)
 
   useEffect(() => {
     dispatch(getUserByUsername(username)).then((res) => {
@@ -43,6 +45,10 @@ const Threads = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.threads])
 
+  if (isLoading) {
+    return <Loading />
+  }
+  
   return (
     <div className='sm:px-6 lg:px-8 max-w-3xl px-2 mx-auto text-white'>
       <section className='h-30 grid grid-cols-4 mt-6'>
@@ -98,7 +104,7 @@ const Threads = () => {
                     <span className='whitespace-nowrap text-stone-500 font-medium'>
                       {elapsedTimes[thread._id] || 'Just now'}
                     </span>{' '}
-                    <ThreadDropMenu thread={thread} />
+                    {/* <ThreadDropMenu thread={thread} /> */}
                   </div>
                   <CommentModal
                     open={open}

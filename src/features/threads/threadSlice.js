@@ -10,6 +10,12 @@ const initialState = {
   errorMessage: '',
 }
 
+export const clearThreads = () => {
+  return (dispatch) => {
+    dispatch(reset())
+  }
+}
+
 // Thunk for getting threads by user.
 export const getThreadsByUser = createAsyncThunk(
   'threads/getThreadsByUser',
