@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:5001/api/threads'
+const API_URL = 'https://comedythreads-backend-e3693173069a.herokuapp.com/api/threads'
 
 const threadService = {
   getThreadsByUser: async () => {
