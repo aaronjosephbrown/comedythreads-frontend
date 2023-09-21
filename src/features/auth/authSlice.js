@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
+// import logoutTimer from '../../utils/logoutTimer'
 
 const initialState = {
   user: localStorage.getItem('user') || null,
@@ -16,7 +17,9 @@ export const login = createAsyncThunk(
   'auth/login',
   async ({ username, password }, thunkAPI) => {
     try {
-      return await authService.login({ username, password })
+      const data = await authService.login({ username, password })
+      // logoutTimer(data.expiresIn * 1000)
+      return data
     } catch (error) {
       const message =
         error.response.data.errors[0].msg ||
@@ -30,6 +33,17 @@ export const login = createAsyncThunk(
     }
   }
 )
+
+// export const refreshToken = createAsyncThunk(
+//   'auth/refreshToken',
+//   async (thunkAPI) => {
+//     try {
+//       return await authService.refreshToken() // Implement this function in your authService
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue({ message: error.message })
+//     }
+//   }
+// )
 
 // Thunk for logging out user.
 export const logout = createAsyncThunk('auth/logout', async () => {
@@ -176,6 +190,11 @@ export const authSlice = createSlice({
         state.errorMessage = action.payload.message
         state.isLoading = false
       })
+      // .addCase(refreshToken.fulfilled, (state, action) => {
+      //   state.user = action.payload
+      //   clearTimeout(logoutTimer)
+      //   // setLogoutTimer(action.payload.expiresIn * 1000);
+      // })
   },
 })
 
