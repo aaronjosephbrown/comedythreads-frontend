@@ -77,7 +77,6 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <LoginFooter />
       </div>
     )
   }
