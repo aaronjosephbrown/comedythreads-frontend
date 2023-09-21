@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:5001/api/users'
+const API_URL = 'https://comedythreads-backend-e3693173069a.herokuapp.com//api/users'
 
 const authService = {
   login: async ({ username, password }) => {
