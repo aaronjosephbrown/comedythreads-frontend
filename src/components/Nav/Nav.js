@@ -46,6 +46,16 @@ const Nav = () => {
           <HomeIcon className='h-8' />
         </NavLink>
       ),
+      mobileComponent: (
+        <NavLink
+          to='/'
+          className={({ isActive }) =>
+            isActive ? 'text-white' : 'h-8 text-[#777777]'
+          }
+        >
+          Home
+        </NavLink>
+      )
     },
     {
       name: 'Search',
@@ -60,6 +70,14 @@ const Nav = () => {
           <PencilSquareIcon className='h-8 text-[#777777]' />
         </button>
       ),
+      mobileComponent: (
+        <button
+          onClick={() => setOpenNT(true)}
+          className='text-[#777777]'
+        >
+         Post
+        </button>
+      )
     },
     {
       name: 'Likes',
@@ -79,6 +97,16 @@ const Nav = () => {
           <UserIcon className='h-8' />{' '}
         </NavLink>
       ),
+      mobileComponent: (
+        <NavLink
+          to='/me'
+          className={({ isActive }) =>
+            isActive ? 'text-white' : 'h-8 text-[#777777]'
+          }
+        >
+          My Profile
+        </NavLink>
+      )
     },
   ]
 
@@ -135,7 +163,7 @@ const Nav = () => {
                     <Menu as='div' className='relative ml-3'>
                       <div>
                         <Menu.Button className='focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 relative flex text-sm bg-gray-800 rounded-full'>
-                          <div className='flex w-auto h-8'>
+                          <div className='flex h-8 w-8'>
                             <ProfileImage />
                           </div>
                         </Menu.Button>
@@ -186,19 +214,19 @@ const Nav = () => {
             <Disclosure.Panel className='sm:hidden'>
               <div className='px-2 pt-2 pb-3 space-y-1'>
                 {navigation.map((item) => (
-                  <NavLink
+                  <div
                     key={item.name}
-                    to={item.to}
                     className={classNames(
                       item.current
                         ? 'bg-[#101010] text-[#f3f5f7]'
                         : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'block rounded-md px-3 py-2 text-base font-medium'
+                      'block rounded-md px-3 py-1 text-base font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
                   >
-                    {item.name}
-                  </NavLink>
+                    {item.mobileComponent}
+                  </div>
+                 
                 ))}
               </div>
             </Disclosure.Panel>

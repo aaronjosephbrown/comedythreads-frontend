@@ -1,6 +1,5 @@
 import logo from '../../assets/img/comedy-thread-logo.png'
 import LoginForm from '../../components/LoginComponets/LoginForm'
-import LoginFooter from '../../components/LoginComponets/LoginFooter'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
