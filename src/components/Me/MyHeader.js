@@ -2,7 +2,7 @@ import MyImage from '../Profile/ProfileImage'
 
 const MyHeader = ({ username, bio, joined }) => {
   return (
-    <section className='h-30 grid grid-cols-4 mt-6'>
+    <section className='h-30 grid grid-cols-3 sm:grid-cols-4 mt-6'>
       <div className='flex h-32'>
         <MyImage />
       </div>

@@ -51,7 +51,7 @@ const Threads = () => {
   
   return (
     <div className='sm:px-6 lg:px-8 max-w-3xl px-2 mx-auto text-white'>
-      <section className='h-30 grid grid-cols-4 mt-6'>
+      <section className='h-30 grid grid-cols-3 sm:grid-cols-4 mt-6'>
         <div className='flex h-32'>
           <img src={user.avatar} alt='profile' className='h-32 rounded-full' />
         </div>
@@ -80,8 +80,9 @@ const Threads = () => {
                           alt='profile'
                           className='rounded-full'
                         />
+                        <span className='ml-2 font-semibold'>{username}</span>
                       </div>
-                      <span className='ml-2 font-semibold'>{username}</span>
+                      
                     </div>
                     <div className='pl-12'>
                       <span>{thread.text}</span>

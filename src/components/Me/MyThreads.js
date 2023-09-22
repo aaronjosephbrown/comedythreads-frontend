@@ -56,9 +56,10 @@ const MyThreads = ({ threads, username }) => {
                     <div className='whitespace-nowrap flex h-10 pr-5 -mb-5'>
                       <div className='flex h-10'>
                         <ProfileImage />
-                      </div>
-                      <span className='ml-2 font-semibold'>{username}</span>
+                        <span className='ml-2 font-semibold'>{username}</span>
                     </div>
+                      </div>
+                     
                     <div className='pl-12'>
                       <span>{thread.text}</span>
                       <ul className='flex gap-3 mt-2'>
