@@ -5,13 +5,14 @@ export const refreshContext = createContext()
 
 const RefreshContextProvider = ({ children }) => {
   const { user } = useSelector((state) => state.auth)
+  const { allThreads, isLoading } = useSelector((state) => state.threads)
   const [refresh, setRefresh] = useState(false)
   const [localUser, setLocalUser] = useState(JSON.parse(localStorage.getItem('user')))
 
   useEffect(() => {
-    setRefresh(false)
+    setRefresh(isLoading)
     setLocalUser(JSON.parse(localStorage.getItem('user')))
-  }, [refresh, user])
+  }, [refresh, user, allThreads])
 
   const clearContext = () => {
     setLocalUser('')

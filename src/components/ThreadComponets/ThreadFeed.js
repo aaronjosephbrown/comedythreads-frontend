@@ -69,7 +69,7 @@ const ThreadFeed = () => {
                   <ul className='flex gap-3 mt-2'>
                     <li className='flex gap-2'>
                       <LikeButton thread={thread} />
-                      <LikeCounter thread={thread} />
+                      <LikeCounter thread={thread} allThreads={allThreads} />
                     </li>
                     <li>
                       <CommentButton
