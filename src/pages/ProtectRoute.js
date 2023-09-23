@@ -1,9 +1,14 @@
 import { Outlet, Navigate } from 'react-router-dom'
 import Nav from '../components/Nav/Nav'
 import Footer from '../components/Footer/Footer'
+import { useEffect } from 'react'
 
 const ProtectedRoute = () => {
   const isAuthenticated = localStorage.getItem('user') !== null
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div>
