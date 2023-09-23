@@ -41,8 +41,9 @@ const ThreadFeed = () => {
   }, [allThreads])
 
   return (
-    <div className='h-30 mt-6'>
-      <div className='flex flex-col h-32'>
+    
+    <div className='sm:px-6 lg:px-8 max-w-3xl px-2 mx-auto text-white h-30 mt-6 min-h-screen'>
+      <div className='flex flex-col'>
         <ul className='flex flex-col space-y-5'>
           {allThreads.toReversed().map((thread) => (
             <li

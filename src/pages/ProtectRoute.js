@@ -1,14 +1,27 @@
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom'
+import Nav from '../components/Nav/Nav'
+import Footer from '../components/Footer/Footer'
 
 const ProtectedRoute = () => {
+  const isAuthenticated = localStorage.getItem('user') !== null
 
-  const isAuthenticated = localStorage.getItem('user') !== null;
-  
   return (
-    <div className='bg-[#101010] min-h-screen overflow-auto'>
-      {isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />}
+    <div>
+      {isAuthenticated ? (
+        <div className='relative'>
+          <div className='fixed top-0 opacity-95 w-screen'>
+            <Nav />
+          </div>
+          <div className='mt-24'>
+            <Outlet />
+            <Footer />
+          </div>
+        </div>
+      ) : (
+        <Navigate to='/login' replace />
+      )}
     </div>
-  );
+  )
 }
 
-export default ProtectedRoute;
+export default ProtectedRoute

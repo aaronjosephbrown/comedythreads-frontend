@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import { Disclosure } from '@headlessui/react'
 import ProfileUpdate from './Modal/ProfileUpdate'
@@ -12,14 +11,9 @@ import ProfileMenu from './ProfileMenu'
 const Nav = () => {
   const [openProfile, setOpenProfile] = useState(false)
   const [openNT, setOpenNT] = useState(false)
-  const { user } = useSelector((state) => state.auth)
-
-  if (user === null) {
-    return <></>
-  }
 
   return (
-    <nav>
+    <nav className='bg-[#101010]'>
       <Disclosure className='bg-[#101010]' >
         {({ open, close }) => (
           <>
