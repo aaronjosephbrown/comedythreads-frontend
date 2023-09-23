@@ -3,14 +3,14 @@ import { useState } from 'react'
 import { Disclosure } from '@headlessui/react'
 import ProfileUpdate from './Modal/ProfileUpdate'
 import NewThreadModal from '../ThreadComponets/Modals/NewThreadModal'
-import MobileMenu from './MobelMenu'
+import MobileMenu from './MobileMenu'
 import DisclosureButton from './DisclosureButton'
 import NavLogo from './NavLogo'
 import DesktopNav from './DesktopNav'
 import ProfileMenu from './ProfileMenu'
 
 const Nav = () => {
-  const [open, setOpen] = useState(false)
+  const [openProfile, setOpenProfile] = useState(false)
   const [openNT, setOpenNT] = useState(false)
   const { user } = useSelector((state) => state.auth)
 
@@ -19,9 +19,9 @@ const Nav = () => {
   }
 
   return (
-    <nav className='sticky top-0'>
-      <Disclosure as='nav' className='bg-[#101010]'>
-        {({ open }) => (
+    <nav>
+      <Disclosure className='bg-[#101010]' >
+        {({ open, close }) => (
           <>
             <div className='sm:px-6 lg:px-8 max-w-7xl px-2 mx-auto'>
               <div className='relative flex items-center justify-between h-16'>
@@ -31,16 +31,16 @@ const Nav = () => {
                   <DesktopNav setOpenNT={setOpenNT} />
                   <div className='sm:static sm:inset-auto sm:ml-6 sm:pr-0 absolute inset-y-0 right-0 flex items-center pr-2'>
                     {/* Profile dropdown */}
-                    <ProfileMenu setOpen={setOpen} />
+                    <ProfileMenu setOpen={setOpenProfile} />
                   </div>
                 </div>
               </div>
             </div>
-            <MobileMenu setOpenNT={setOpenNT} />
+            <MobileMenu setOpenNT={setOpenNT} close={close} />
           </>
         )}
       </Disclosure>
-      <ProfileUpdate open={open} setOpen={setOpen} />
+      <ProfileUpdate open={openProfile} setOpen={setOpenProfile} />
       <NewThreadModal open={openNT} setOpen={setOpenNT} />
     </nav>
   )

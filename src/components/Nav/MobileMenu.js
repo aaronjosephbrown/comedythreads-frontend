@@ -5,7 +5,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const MobileMenu = ({ setOpenNT }) => {
+const MobileMenu = ({ setOpenNT, close }) => {
   const navItems = navigation(setOpenNT)
 
   return (
@@ -14,6 +14,10 @@ const MobileMenu = ({ setOpenNT }) => {
         {navItems.map((item) => (
           <div
             key={item.name}
+            as='button'
+            onClick={() => {
+              close()
+            }}
             className={classNames(
               item.current
                 ? 'bg-[#101010] text-[#f3f5f7]'
